@@ -1,35 +1,60 @@
-// import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+import {SearchBar} from './components/SearchBar/SearchBar';
+import { fetchPokemonsByTerm } from './api/pokemonAPI';
+
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [pokemons, setPokemons] = useState([]);
+  useEffect(() => {
+    const loadData = async () => {
+        let data;
+
+        // Check for cached data in localStorage
+        const cachedData = localStorage.getItem('pokemons');
+
+        if (cachedData) {
+            data = JSON.parse(cachedData);
+        } else {
+          if (searchTerm) {
+            try {
+              const data = await fetchPokemonsByTerm(searchTerm);
+              setPokemons(data);
+          } catch (error) {
+              console.error('Failed to fetch pokemons by term:', error);
+          }
+
+          }
+            // try {
+            //     data = await fetchAllPokemons();
+            //     localStorage.setItem('pokemons', JSON.stringify(data)); // Cache the data
+            // } catch (error) {
+            //     console.error('Failed to load pokemons:', error);
+            // }
+        }
+
+        setPokemons(data);
+    };
+    
+    loadData();
+}, []);
   return (
     <div className="App">
-      hello world!
       <div className='search-bar-container'>
-        <div>search bar</div>
+        {/* <div>search bar</div>
+         */}
+         <SearchBar onSearch={setSearchTerm}/>
+         {searchTerm}
         
       </div>
       <div className='switch'>
         <div>Route
-          <div>list</div>
+          <div classNa>list</div>
           <div>GalleryView</div>
         </div>
         
       </div>
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
     </div>
   );
 }
