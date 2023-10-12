@@ -1,62 +1,47 @@
 import './App.css';
-import React, { useState } from 'react';
-import {SearchBar} from './components/SearchBar/SearchBar';
-import { fetchPokemonsByTerm } from './api/pokemonAPI';
-
+import React, { useState, useEffect } from 'react';
+import SearchBar from './components/SearchBar/SearchBar';
+import { fetchMoviesByTerm } from './api/tmdbApi';
+import  PokemonList from "./components/PokemonList/PokemonList"
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [pokemons, setPokemons] = useState([]);
-  useEffect(() => {
-    const loadData = async () => {
-        let data;
+    const [searchTerm, setSearchTerm] = useState('');
+    // const [pokemons, setPokemons] = useState([]);
+    const [movies, setMovies] = useState([]);
+    // const []
 
-        // Check for cached data in localStorage
-        const cachedData = localStorage.getItem('pokemons');
-
-        if (cachedData) {
-            data = JSON.parse(cachedData);
-        } else {
+    useEffect(() => {
+      const loadData = async () => {
           if (searchTerm) {
-            try {
-              const data = await fetchPokemonsByTerm(searchTerm);
-              setPokemons(data);
-          } catch (error) {
-              console.error('Failed to fetch pokemons by term:', error);
+              try {
+                  const data = await fetchMoviesByTerm(searchTerm);
+                  setMovies(data);
+              } catch (error) {
+                  console.error('Failed to fetch movies by term:', error);
+              }
           }
+      };
 
-          }
-            // try {
-            //     data = await fetchAllPokemons();
-            //     localStorage.setItem('pokemons', JSON.stringify(data)); // Cache the data
-            // } catch (error) {
-            //     console.error('Failed to load pokemons:', error);
-            // }
-        }
+      loadData();
+  }, [searchTerm]);
+  // console.log(movies)
 
-        setPokemons(data);
-    };
-    
-    loadData();
-}, []);
-  return (
-    <div className="App">
-      <div className='search-bar-container'>
-        {/* <div>search bar</div>
-         */}
-         <SearchBar onSearch={setSearchTerm}/>
-         {searchTerm}
-        
-      </div>
-      <div className='switch'>
-        <div>Route
-          <div classNa>list</div>
-          <div>GalleryView</div>
+
+    return (
+        <div className="App">
+            <div className='search-bar-container'>
+                <SearchBar onSearch={setSearchTerm} />
+            </div>
+            <div className='switch'>
+                <div>Route
+                    {searchTerm.length > 0 && movies && movies.length > 0 && <PokemonList pokemons={movies} />}
+                    {/* <div className>list</div> */}
+                    <div>GalleryView</div>
+                </div>
+            </div>
         </div>
-        
-      </div>
-    </div>
-  );
+    );
 }
 
 export default App;
+

@@ -5,7 +5,7 @@ function PokemonList({ pokemons }) {
     return (
         <ul className="pokemon-list">
             {pokemons.map((pokemon,id) => (
-                <li key={id}>{pokemon.name}</li>
+                <li key={id}>{pokemon.title}</li>
             ))}
         </ul>
     );
