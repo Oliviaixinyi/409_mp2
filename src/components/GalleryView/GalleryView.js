@@ -70,11 +70,11 @@ function GalleryView({genre}) {
             <ul className='movie-gallery'>
                 {/* <h2>Gallery View</h2> */}
                 {Object.entries(localStorageData)
-                .sort((a,b) => {
-                    const movieA = a[1];
-                    const movieB = b[1];
-                    return movieA.title.localeCompare(movieB.title);
-                })
+                // .sort((a,b) => {
+                //     const movieA = a[1];
+                //     const movieB = b[1];
+                //     return movieA.title.localeCompare(movieB.title);
+                // })
                 .filter(([id, movie]) => {
                     // Check if the movie has poster_path
                     const hasPoster = movie && movie.poster_path;
