@@ -1,0 +1,35 @@
+.movie-detail-modal {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    position: relative;
+    /* margin: 50px auto;
+    width: 30vw;
+    height: 30vh;
+    border: 1px solid #ccc;
+    border-radius: 10px; */
+  /* display: flex; */
+  position: relative;
+  /* align-items: center;
+  justify-content: center; */
+
+}
+
+
+.movie-detail-header {
+    display: flex;
+    gap: 16px; /* Space between images */
+    
+}
+
+/* In your CSS file */
+.movie-detail-modal img {
+    width: 20vw;  /* Adjust this value according to your desired width */
+    height: auto;  /* This will maintain the image's aspect ratio */
+    display: block;
+    margin: 20px auto;  /* Centers the image if the parent container has text-align set to center */
+}
+

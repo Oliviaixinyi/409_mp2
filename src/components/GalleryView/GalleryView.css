@@ -1,0 +1,40 @@
+/* body, html {
+    margin: 0;
+    padding: 0;
+} */
+.movie-gallery {
+    /* align-items: center; Vertically aligns items in the center */
+    justify-content: center;
+    /* margin-left: 0; */
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Space between images */
+    list-style-type: none;
+    /* padding: 0; Remove default padding */
+}
+
+.movie-gallery li {
+    width: 14rem; /* Width of the movie poster */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+    overflow: hidden; /* Helps in case images are larger than container */
+    border-radius: 8px; /* Rounded corners */
+    transition: transform 0.3s ease; /* Smooth scaling on hover */
+}
+
+.movie-gallery li:hover {
+    transform: scale(1.05); /* Scale image a bit on hover */
+}
+
+.movie-gallery img {
+    width: 100%; /* Make the image take full width of its container */
+    height: auto; /* Keep aspect ratio */
+    display: block; /* Remove any space below the image */
+}
+
+.movie-gallery p {
+    text-align: center;
+    padding: 8px 0;
+    font-weight: bold;
+}

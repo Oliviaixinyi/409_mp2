@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaSearch } from "react-icons/fa";
 import './SearchBar.css';
+import PropTypes from 'prop-types';
 
 function SearchBar(props) {
     const [searchTerm, setSearchTerm] = useState('');
@@ -24,5 +25,9 @@ function SearchBar(props) {
         
     );
 }
+
+SearchBar.propTypes = {
+    onSearch: PropTypes.func.isRequired
+};
 
 export default SearchBar;

@@ -6,18 +6,112 @@
 } 
 
 .search-bar-container {
-  padding-top: 20vh;
+  padding-top: 5vh;
   width: 40%;
   margin:auto;
   display: flex;
 
 }
 
-.switch {
+.filter-section {
+  padding-top: 3vh;
+  width: 40%;
+  margin:auto;
+  display: flex;
+
+}
+
+.select-container {
+  width: 100%;
+  height: 2.5rem;
+  border: none;
+  border-radius: 10px;
+  padding: 0 15px;
+  box-shadow: 0px 0px 8px #ddd;
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+
+.order-section {
+  /* width: 12px;  
+  height: 12px; */
+  padding-top: 3vh;
+  display: flex;
+  justify-content: center;
+  gap: 100px; 
+}
+
+.order-section input[type="radio"] {
+  width: 15px;   /* Adjust as needed */
+  height: 15px;  /* Adjust as needed */
+  -webkit-appearance: radio; /* Helps retain the radio look in WebKit browsers */
+  appearance: radio;         /* For newer browsers that support this property */
+  margin: 0;                 /* Remove any default margin */
+  vertical-align: middle;   /* Helps align it vertically centered */
+}
+
+.move-list {
   /* padding-top: 20vh; */
   width: 40%;
   margin:auto;
   display: flex;
 
 }
+
+/* Styling for the navigation container */
+.navigation {
+  display: flex;
+  justify-content: center;  /* center the buttons horizontally */
+  margin: 20px 0; /*  add some margin top and bottom */
+}
+
+/* Base styles for the links */
+.navigation a {
+  padding: 10px 20px;   /* padding around the text */
+  margin: 0 20px;   /* space between the buttons */
+  text-decoration: none;   /* remove the underline */
+  color: white;   /* text color */
+  background-color: #75afec;   /* button color */
+  border-radius: 5px;   /* rounded corners */
+  transition: background-color 0.3s;  /* transition for hover effect */
+}
+
+/* Hover effect */
+.navigation a:hover {
+  background-color: #0056b3;   /* darken the button color on hover */
+}
+
+.gallery-list {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* This will center the children vertically */
+  align-items: center;     /* This will center the children horizontally */
+  height: 100vh;           /* 100% of the viewport height. Adjust if needed */
+}
+/* Basic styling for the buttons */
+.genre-navigation button {
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #75afec;  /* light grey */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* transition for smooth color change */
+}
+
+/* Hover effect */
+.genre-navigation button:hover {
+  background-color: #ddd;  /* slightly darker grey */
+}
+
+/* Active state styling */
+.genre-navigation button[data-active="true"] {
+  background-color: #007BFF; /* change to any color you prefer */
+  color: white;
+}
+
+
+
 
