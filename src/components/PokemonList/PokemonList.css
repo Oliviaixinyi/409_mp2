@@ -10,16 +10,27 @@
     overflow-y: auto;
   }
 
+.pokemon-list Link {  /* Reset default anchor styles within the .pokemon-list */
+    text-decoration: none;  /* Remove underline */
+    color: inherit;  /* Inherit the color from parent */
+    display: inline-block;  /* This may help with layout */
+}
+
 
 li {
-    display: flex;
-    /* align-items: center;  */
+    /* display: flex; */
+    /* align-items: center; */
     padding: 1rem 0.3rem;
     border-bottom: 1px solid #ccc;
 }
 
-.movie-info {
+
+/* .movie-info {
     display: block;
+} */
+
+.movie-info {
+    display: inline-block;
 }
 
 li h3 {

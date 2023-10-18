@@ -17,7 +17,7 @@ function SearchBar(props) {
             <input
             type="text"
             className="search-input"
-            placeholder="Search for a Pokemon..."
+            placeholder="Search for a Movie..."
             value={searchTerm}
             onChange={handleInputChange}
         />

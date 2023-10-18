@@ -47,6 +47,36 @@ function getAllLocalStorageData() {
 
 }
 
+// function getFilteredMovies(localStorageData, genreId) {
+//     return Object.entries(localStorageData)
+//         .filter(([id, movie]) => {
+//             const hasPoster = movie && movie.poster_path;
+//             const isInGenre = !genreId || (movie.genre_ids && movie.genre_ids.includes(genreId));
+//             return hasPoster && isInGenre;
+//         });
+// }
+
+function getFilteredMovies(localStorageData, genreId) {
+    return Object.entries(localStorageData)
+        .filter(([id, movie]) => {
+            const hasPoster = movie && movie.poster_path;
+            const isInGenre = !genreId || (movie.genre_ids && movie.genre_ids.includes(genreId));
+            return hasPoster && isInGenre;
+        })
+        // .map(([id, movie]) => movie);  // Extract only the movie objects
+}
+
+function getFilteredMovies2(localStorageData, genreId) {
+    return Object.entries(localStorageData)
+        .filter(([id, movie]) => {
+            const hasPoster = movie && movie.poster_path;
+            const isInGenre = !genreId || (movie.genre_ids && movie.genre_ids.includes(genreId));
+            return hasPoster && isInGenre;
+        })
+        .map(([id, movie]) => movie);  // Extract only the movie objects
+}
+
+
 function GalleryView({genre}) {
     const [localStorageData, setLocalStorageData] = useState({});
     // console.log(`current genre is ${genre}`)
@@ -60,21 +90,20 @@ function GalleryView({genre}) {
 
     const navigate = useNavigate();
 
-    const handleMovieClick = (movieId) => {
-        navigate(`/movie/${movieId}`);
+    const handleMovieClick = (movieId,filteredMovies) => {
+        navigate(`/movie/${movieId}`, { 
+            state: { from: 'GalleryView', filteredMovies: filteredMovies } 
+        });
     };
+    const filteredMovies = getFilteredMovies(localStorageData, genreId);
+    const filteredMovies2 = getFilteredMovies2(localStorageData,genreId)
 
     return (
         <div>
             {/* <h2 id='gallery_id'>Gallery View</h2> */}
             <ul className='movie-gallery'>
                 {/* <h2>Gallery View</h2> */}
-                {Object.entries(localStorageData)
-                // .sort((a,b) => {
-                //     const movieA = a[1];
-                //     const movieB = b[1];
-                //     return movieA.title.localeCompare(movieB.title);
-                // })
+                {filteredMovies
                 .filter(([id, movie]) => {
                     // Check if the movie has poster_path
                     const hasPoster = movie && movie.poster_path;
@@ -83,8 +112,8 @@ function GalleryView({genre}) {
                     return hasPoster && isInGenre;
                 })
                 .map(([id,movie]) => (
-                    <li key = {id } onClick={() => handleMovieClick(id)}>
-                         <Link to={`/movie/${id}`}> <img src={`${BASE_URL}${movie.poster_path}`} alt={movie.title} /></Link>
+                    <li key = {id } onClick={() => handleMovieClick(movie.id,filteredMovies2)}>
+                         <Link to={`/movie/${movie.id}`}> <img src={`${BASE_URL}${movie.poster_path}`} alt={movie.title} /></Link>
                     </li>
                 ))}
             </ul>

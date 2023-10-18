@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './PokemonList.css';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w1280';
@@ -22,17 +23,31 @@ function PokemonList({ pokemons, filter, order }) {
         return result;
         // return 0;  // Default, no sorting
     });
+    const navigate = useNavigate();
+
+    const handleMovieClick = (movieId) => {
+        navigate(`/movie/${movieId}`, { 
+            state: { from: 'PokemonList', filteredMovies: sortedPokemons } 
+        });
+    };
+    // console.log(`Sorted message:  ${sortedPokemons}`);
     return (
         <ul className="pokemon-list">
             {sortedPokemons
             .filter((pokemon,id) => pokemon.poster_path && pokemon.vote_average)
             .map((pokemon,id) => (
-                <li key={id}>
-                    <img src={`${BASE_URL}${pokemon.poster_path}`} alt={pokemon.title} />
+                <li key={id} onClick={() => handleMovieClick(pokemon.id)}>
+                    <Link to={`/movie/${pokemon.id}`}> <img src={`${BASE_URL}${pokemon.poster_path}`} alt={pokemon.title} />
+                    </Link>
+                    <div className='movie-info'> 
+                            <h3 >{pokemon.title}</h3>
+                            <h4 >{`Rating: ${pokemon.vote_average}`}</h4>
+                     </div>
+                    {/* <img src={`${BASE_URL}${pokemon.poster_path}`} alt={pokemon.title} />
                     <div className='movie-info'> 
                         <h3 >{pokemon.title}</h3>
                         <h4 >{`Rating: ${pokemon.vote_average}`}</h4>
-                    </div>
+                    </div> */}
                 </li>
                 
             ))}
